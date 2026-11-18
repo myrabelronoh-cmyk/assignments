@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test --test-reporter=junit --test-reporter-destination=./junit.xml"
+    "test": "vitest run --reporter=junit --outputFile=./junit.xml"
   },
   "dependencies": {
     "react": "^19.3.1",
@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.2",
-    "vite": "^8.3.5"
+    "vite": "^8.3.5",
+    "vitest": "^5.1.1"
   }
 }

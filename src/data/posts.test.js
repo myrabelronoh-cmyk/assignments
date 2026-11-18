@@ -1,28 +1,28 @@
-import assert from "node:assert/strict";
-import test from "node:test";
+import { describe, expect, it } from "vitest";
 import { categories, posts } from "./posts.js";
 
-test("the journal contains uniquely identified stories", () => {
-  assert.ok(posts.length > 0);
-  assert.equal(new Set(posts.map((post) => post.id)).size, posts.length);
-});
+describe("journal data", () => {
+  it("contains uniquely identified stories", () => {
+    expect(posts.length).toBeGreaterThan(0);
+    expect(new Set(posts.map((post) => post.id)).size).toBe(posts.length);
+  });
 
-test("every story has the content required by the journal", () => {
-  for (const post of posts) {
-    assert.ok(post.title.trim());
-    assert.ok(post.excerpt.trim());
-    assert.ok(post.category.trim());
-    assert.ok(post.date.trim());
-    assert.ok(post.image.trim());
-    assert.ok(post.imageAlt.trim());
-    assert.ok(post.body.length > 0);
-  }
-});
+  it("provides the content required by the journal for every story", () => {
+    for (const post of posts) {
+      expect(post.title.trim()).toBeTruthy();
+      expect(post.excerpt.trim()).toBeTruthy();
+      expect(post.category.trim()).toBeTruthy();
+      expect(post.date.trim()).toBeTruthy();
+      expect(post.image.trim()).toBeTruthy();
+      expect(post.imageAlt.trim()).toBeTruthy();
+      expect(post.body.length).toBeGreaterThan(0);
+    }
+  });
 
-test("categories include all story topics and start with the all-stories filter", () => {
-  assert.equal(categories[0], "All stories");
-  assert.deepEqual(
-    new Set(categories.slice(1)),
-    new Set(posts.map((post) => post.category)),
-  );
+  it("lists every story topic after the all-stories filter", () => {
+    expect(categories[0]).toBe("All stories");
+    expect(
+      new Set(categories.slice(1)),
+    ).toEqual(new Set(posts.map((post) => post.category)));
+  });
 });
